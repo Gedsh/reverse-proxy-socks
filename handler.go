@@ -18,6 +18,8 @@ func getHandler(transport *http.Transport) http.HandlerFunc {
 			return
 		}
 
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+
 		targetRaw := r.URL.Path[1:]
 		targetURLStr, err := url.QueryUnescape(targetRaw)
 		if err != nil {
@@ -42,8 +44,6 @@ func getHandler(transport *http.Transport) http.HandlerFunc {
 			return
 		}
 		defer resp.Body.Close()
-
-		w.Header().Set("Access-Control-Allow-Origin", "*")
 
 		for k, vv := range resp.Header {
 			if strings.ToLower(k) == "content-length" ||
