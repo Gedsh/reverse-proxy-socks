@@ -128,6 +128,6 @@ func rewriteM3U8(w http.ResponseWriter, body io.Reader, baseURL *url.URL) {
 
 func addOptionsCORSHeaders(w http.ResponseWriter) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, PATCH, HEAD, CONNECT, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization, Range, X-Requested-With")
 }
