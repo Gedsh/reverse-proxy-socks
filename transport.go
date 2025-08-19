@@ -35,8 +35,9 @@ func getTransport() *http.Transport {
 			return dialer.Dial(network, addr)
 		},
 		DisableKeepAlives:   false,
-		MaxIdleConns:        10,
-		IdleConnTimeout:     30 * time.Second,
-		TLSHandshakeTimeout: 10 * time.Second,
+		MaxIdleConns:        50,
+		MaxIdleConnsPerHost: 10,
+		IdleConnTimeout:     90 * time.Second,
+		TLSHandshakeTimeout: 30 * time.Second,
 	}
 }

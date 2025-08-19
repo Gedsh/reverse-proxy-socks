@@ -34,7 +34,12 @@ func main() {
 
 	httpTransport := getTransport()
 
-	proxyHandler := getHandler(httpTransport)
+	client := &http.Client{
+		Transport: httpTransport,
+		Timeout:   120 * time.Second,
+	}
+
+	proxyHandler := getHandler(client)
 
 	server := &http.Server{
 		Addr:    proxyAddr,

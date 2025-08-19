@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-func getHandler(transport *http.Transport) http.HandlerFunc {
+func getHandler(client *http.Client) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodOptions {
 			addOptionsCORSHeaders(w)
@@ -38,7 +38,7 @@ func getHandler(transport *http.Transport) http.HandlerFunc {
 		outReq.URL = targetURL
 		outReq.RequestURI = ""
 
-		resp, err := transport.RoundTrip(outReq)
+		resp, err := client.Do(outReq)
 		if err != nil {
 			http.Error(w, "Proxy error: "+err.Error(), http.StatusBadGateway)
 			return
