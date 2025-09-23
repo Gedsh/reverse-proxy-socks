@@ -19,6 +19,9 @@ export CGO_CXXFLAGS="-g -O3 -funsafe-math-optimizations -ftree-vectorize -fvecto
 export CGO_FFLAGS="-g -O3 -funsafe-math-optimizations -ftree-vectorize -fvectorize -fslp-vectorize"
 export CGO_LDFLAGS="-g -O3 -funsafe-math-optimizations -ftree-vectorize -fvectorize -fslp-vectorize"
 
+go clean
+go build -x -ldflags="-s -w" -compiler gc -gcflags="-m -dwarf=false" -o libreverseproxy.so
+
 #arm64:
 export GOARCH='arm64'
 export GOARM64='v8.0,crypto'
@@ -29,6 +32,9 @@ export CGO_CPPFLAGS="-g -O3 -funsafe-math-optimizations -ftree-vectorize -fvecto
 export CGO_CXXFLAGS="-g -O3 -funsafe-math-optimizations -ftree-vectorize -fvectorize -fslp-vectorize"
 export CGO_FFLAGS="-g -O3 -funsafe-math-optimizations -ftree-vectorize -fvectorize -fslp-vectorize"
 export CGO_LDFLAGS="-g -O3 -funsafe-math-optimizations -ftree-vectorize -fvectorize -fslp-vectorize"
+
+go clean
+go build -x -ldflags="-s -w -extldflags '-Wl,-z,max-page-size=16384'" -compiler gc -gcflags="-m -dwarf=false" -o libreverseproxy.so
 
 #x86_64:
 export GOARCH='amd64'
@@ -41,8 +47,6 @@ export CGO_CXXFLAGS="-g -O3 -funsafe-math-optimizations -ftree-vectorize -fvecto
 export CGO_FFLAGS="-g -O3 -funsafe-math-optimizations -ftree-vectorize -fvectorize -fslp-vectorize"
 export CGO_LDFLAGS="-g -O3 -funsafe-math-optimizations -ftree-vectorize -fvectorize -fslp-vectorize"
 
-#common:
-
 go clean
-go build -x -ldflags="-s -w" -compiler gc -gcflags="-m -dwarf=false" -o libreverseproxy.so
+go build -x -ldflags="-s -w -extldflags '-Wl,-z,max-page-size=16384'" -compiler gc -gcflags="-m -dwarf=false" -o libreverseproxy.so
 
