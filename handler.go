@@ -36,6 +36,7 @@ func getHandler(client *http.Client) http.HandlerFunc {
 		outReq := new(http.Request)
 		*outReq = *r
 		outReq.URL = targetURL
+		outReq.Host = targetURL.Host
 		outReq.RequestURI = ""
 
 		resp, err := client.Do(outReq)
